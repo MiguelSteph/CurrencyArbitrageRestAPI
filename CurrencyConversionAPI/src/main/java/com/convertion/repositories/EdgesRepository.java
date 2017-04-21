@@ -26,7 +26,7 @@ public interface EdgesRepository {
      * 
      * @return A list of edges
      */
-    Collection<Edges> findAllEdges();
+    Collection<Edges> findAllEdges(String from);
 
     /**
      * Delete the edge that match with the provided code.

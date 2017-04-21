@@ -20,7 +20,7 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
     private HashOperations<String, String, Currency> hashOps;
 
     @Autowired
-    public CurrencyRepositoryImpl(RedisTemplate<String, Currency> redisTemplate) {
+    public CurrencyRepositoryImpl(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
