@@ -17,6 +17,10 @@ public class QueryResponseWrapper implements Serializable {
 
     private final String to;
     
+    private String fromCurrFullName;
+    
+    private String toCurrFullName;
+    
     /** boolean that mark if there is an infinite arbitrage or not */
     private boolean hasInfiniteArbitrage;
 
@@ -31,9 +35,6 @@ public class QueryResponseWrapper implements Serializable {
 
     /** contains the path from the source currency to reach the infinite arbitrage */
     private List<String> pathToInfiniteArbitrage;
-
-    /** contains the path from the infinite arbitrage to the end currency*/
-    private List<String> pathFromInfiniteArbitrage;
 
     public QueryResponseWrapper(String fromCurrency, String toCurrency) {
         this.from = fromCurrency;
@@ -80,14 +81,6 @@ public class QueryResponseWrapper implements Serializable {
         this.pathToInfiniteArbitrage = pathToInfiniteArbitrage;
     }
 
-    public List<String> getPathFromInfiniteArbitrage() {
-        return pathFromInfiniteArbitrage;
-    }
-
-    public void setPathFromInfiniteArbitrage(List<String> pathFromInfiniteArbitrage) {
-        this.pathFromInfiniteArbitrage = pathFromInfiniteArbitrage;
-    }
-
     public String getFrom() {
         return from;
     }
@@ -96,12 +89,29 @@ public class QueryResponseWrapper implements Serializable {
         return to;
     }
 
+    public String getFromCurrFullName() {
+        return fromCurrFullName;
+    }
+
+    public void setFromCurrFullName(String fromCurrFullName) {
+        this.fromCurrFullName = fromCurrFullName;
+    }
+
+    public String getToCurrFullName() {
+        return toCurrFullName;
+    }
+
+    public void setToCurrFullName(String toCurrFullName) {
+        this.toCurrFullName = toCurrFullName;
+    }
+
     @Override
     public String toString() {
-        return "QueryResponseWrapper [from=" + from + ", to=" + to + ", hasInfiniteArbitrage=" + hasInfiniteArbitrage
+        return "QueryResponseWrapper [from=" + from + ", to=" + to + ", fromCurrFullName=" + fromCurrFullName
+                + ", toCurrFullName=" + toCurrFullName + ", hasInfiniteArbitrage=" + hasInfiniteArbitrage
                 + ", bestConversionValue=" + bestConversionValue + ", conversionPath=" + conversionPath
                 + ", infiniteArbitrage=" + infiniteArbitrage + ", pathToInfiniteArbitrage=" + pathToInfiniteArbitrage
-                + ", pathFromInfiniteArbitrage=" + pathFromInfiniteArbitrage + "]";
+                + "]";
     }
-    
+
 }

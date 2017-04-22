@@ -14,11 +14,12 @@ import com.convertion.dto.Edges;
 @Repository
 public class EdgesRepositoryImpl implements EdgesRepository {
 
-    //private static final String KEY = "Edges";
+    private static final String KEY = "Edges";
 
     private RedisTemplate<String, Edges> redisTemplate;
     private HashOperations<String, String, Edges> hashOps;
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Autowired
     public EdgesRepositoryImpl(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
@@ -33,6 +34,7 @@ public class EdgesRepositoryImpl implements EdgesRepository {
     @Override
     public void saveEdges(Edges edge) {
         hashOps.put(edge.getFrom(), edge.getCode(), edge);
+        hashOps.put(KEY, edge.getCode(), edge);
     }
 
     /** {@inheritDoc} */
@@ -44,8 +46,8 @@ public class EdgesRepositoryImpl implements EdgesRepository {
 
     /** {@inheritDoc} */
     @Override
-    public Collection<Edges> findAllEdges(String from) {
-        return hashOps.entries(from).values();
+    public Collection<Edges> findAllEdges() {
+        return hashOps.entries(KEY).values();
     }
 
     /** {@inheritDoc} */
@@ -53,6 +55,11 @@ public class EdgesRepositoryImpl implements EdgesRepository {
     public void deleteEdge(String code) {
         String[] str = code.split("_");
         hashOps.delete(str[0], code);
+    }
+
+    @Override
+    public Collection<Edges> findAllEdgesFromU(String from) {
+        return hashOps.entries(from).values();
     }
 
 }
