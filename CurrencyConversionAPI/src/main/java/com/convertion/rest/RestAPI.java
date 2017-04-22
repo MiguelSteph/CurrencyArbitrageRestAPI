@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
@@ -38,8 +39,8 @@ public class RestAPI {
         }
     }
     
-    @RequestMapping(value="/convert/{from}/{to}", method=RequestMethod.GET)
-    public ModelAndView convert(@PathVariable("from") String from, @PathVariable("to") String to) {
+    @RequestMapping(value="/convert", method=RequestMethod.GET)
+    public ModelAndView convert(@RequestParam("from") String from, @RequestParam("to") String to) {
         try {
             return new ModelAndView(view, "data", queryService.convert(from, to));
         } catch (Exception e) {
