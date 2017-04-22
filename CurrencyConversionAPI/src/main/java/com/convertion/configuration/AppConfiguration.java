@@ -14,8 +14,7 @@ public class AppConfiguration extends AbstractAnnotationConfigDispatcherServletI
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Class[] { DispatcherConfiguration.class };
     }
 
     @Override
