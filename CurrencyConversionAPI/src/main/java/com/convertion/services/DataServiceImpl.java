@@ -77,13 +77,15 @@ public class DataServiceImpl implements DataService {
                 }else {
                     Edges edges;
                     for (String key : helper.getRates().keySet()) {
-                        edges = null;
-                        edges = edgesRepository.findEdge(currency.getCode()+"_"+key);
-                        if (edges != null) {
-                            edgesRepository.deleteEdge(edges.getCode());
+                        if (!currency.getCode().equals(key)){
+                            edges = null;
+                            edges = edgesRepository.findEdge(currency.getCode()+"_"+key);
+                            if (edges != null) {
+                                edgesRepository.deleteEdge(edges.getCode());
+                            }
+                            edges = new Edges(currency.getCode(), key, helper.getRates().get(key));
+                            edgesRepository.saveEdges(edges);
                         }
-                        edges = new Edges(currency.getCode(), key, helper.getRates().get(key));
-                        edgesRepository.saveEdges(edges);
                     }
                 }
             }catch(Exception e) {
