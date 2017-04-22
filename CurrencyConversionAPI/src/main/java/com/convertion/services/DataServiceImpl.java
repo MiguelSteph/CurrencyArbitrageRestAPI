@@ -31,13 +31,13 @@ public class DataServiceImpl implements DataService {
     private final static String baseUrl = "http://api.fixer.io/latest";
     private CurrencyRepository currencyRepository;
     private EdgesRepository edgesRepository;
-    
+
     @Autowired
     public DataServiceImpl(CurrencyRepository currencyRepository, EdgesRepository edgesRepository) {
         this.currencyRepository = currencyRepository;
         this.edgesRepository = edgesRepository;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public void loadSupportedCurrencies() {
@@ -60,12 +60,13 @@ public class DataServiceImpl implements DataService {
         System.out.println("loading finished");
     }
 
+    /** {@inheritDoc} */
     @Override
     public void loadLatestEdges() {
         Collection<Currency> currencies = currencyRepository.findAllCurrencies();
         RestTemplate restTemplate = new RestTemplate();
         ApiFixerConsumerHelper helper;
-        int i=0;
+        int i = 0;
         for (Currency currency : currencies) {
             Map<String, String> params = new HashMap<String, String>();
             params.put("base", currency.getCode());
@@ -74,12 +75,12 @@ public class DataServiceImpl implements DataService {
                 helper = restTemplate.getForObject(baseUrl, ApiFixerConsumerHelper.class, params);
                 if (helper == null) {
                     System.out.println(currency.getCode());
-                }else {
+                } else {
                     Edges edges;
                     for (String key : helper.getRates().keySet()) {
-                        if (!currency.getCode().equals(key)){
+                        if (!currency.getCode().equals(key)) {
                             edges = null;
-                            edges = edgesRepository.findEdge(currency.getCode()+"_"+key);
+                            edges = edgesRepository.findEdge(currency.getCode() + "_" + key);
                             if (edges != null) {
                                 edgesRepository.deleteEdge(edges.getCode());
                             }
@@ -88,12 +89,12 @@ public class DataServiceImpl implements DataService {
                         }
                     }
                 }
-            }catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
                 System.out.println(currency.getCode());
             }
         }
-        
+
     }
 
 }

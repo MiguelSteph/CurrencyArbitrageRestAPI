@@ -9,13 +9,14 @@ package com.convertion.services;
 public interface DataService {
 
     /**
-     * this method read the supported currencies files and save all the currencies.
+     * this method read the supported currencies files and save all the
+     * currencies.
      */
     void loadSupportedCurrencies();
-    
+
     /**
      * this method queries the http://api.fixer.io api and save the latest rates
      */
     void loadLatestEdges();
-    
+
 }

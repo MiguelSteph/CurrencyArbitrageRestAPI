@@ -11,6 +11,12 @@ import org.springframework.stereotype.Repository;
 
 import com.convertion.dto.Edges;
 
+/**
+ * This is an implementation of the EdgesRepository
+ * 
+ * @author KAKANAKOU Miguel Stephane (Skakanakou@gmail.com)
+ */
+
 @Repository
 public class EdgesRepositoryImpl implements EdgesRepository {
 
@@ -57,6 +63,7 @@ public class EdgesRepositoryImpl implements EdgesRepository {
         hashOps.delete(str[0], code);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Collection<Edges> findAllEdgesFromU(String from) {
         return hashOps.entries(from).values();

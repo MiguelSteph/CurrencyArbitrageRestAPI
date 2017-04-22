@@ -4,6 +4,12 @@ import java.util.Collection;
 
 import com.convertion.dto.Currency;
 
+/**
+ * This is a simple repository for the Currency class.
+ * 
+ * @author KAKANAKOU Miguel Stephane (Skakanakou@gmail.com)
+ */
+
 public interface CurrencyRepository {
 
     /**

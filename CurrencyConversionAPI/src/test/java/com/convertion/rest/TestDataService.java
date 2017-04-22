@@ -61,9 +61,7 @@ public class TestDataService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-        assertEquals(264346, 264346);
-        
+            
     }
 
 }
