@@ -26,7 +26,7 @@ The API supports two type of query :
 
 To implement the REST API, I go through the following step : 
 
-* **STEP 1**: Create a the query service that contains two methods. The first method return a collection of supported currencies. The second method take two currencies and use the **BellMan-Ford** algorithm to find the shortest path between the currencies. During the **BellMan-Ford** algorithm, we replace the original rates by -log_2(rate)
+* **STEP 1**: Create a the query service that contains two methods. The first method return a collection of supported currencies. The second method take two currencies and use the **BellMan-Ford** algorithm to find the shortest path between the currencies. During the **BellMan-Ford** algorithm, we replace the original rates by `-log_2(rate)`
 Like that the problem of maximization is transformed into minimization problem with negative weight.
 Here is the link to the java file [QueryService](https://github.com/MiguelSteph/CurrencyArbitrageRestAPI/blob/master/CurrencyConversionAPI/src/main/java/com/convertion/services/QueryService.java)
 * **STEP 2** : I then complete my previous jUnit test file to test the QueryService.
